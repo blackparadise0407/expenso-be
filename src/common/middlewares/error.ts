@@ -3,7 +3,6 @@ import { ErrorRequestHandler, RequestHandler } from 'express';
 import { UnauthorizedError } from 'express-oauth2-jwt-bearer';
 
 import { HttpStatus } from '../enums/HttpStatusEnum';
-import { HttpException } from '../exceptions/HttpException';
 import { NotFoundException } from '../exceptions/NotFoundException';
 
 interface IAppError {
@@ -24,17 +23,14 @@ export const error: ErrorRequestHandler = (err, req, res, _next) => {
   const error = {
     errors: null,
   } as IAppError;
+  // Handle error from auth0 checkJwt
   if (err instanceof UnauthorizedError) {
     error.status = err.statusCode;
   }
 
-  if (err instanceof Error) {
-    error.message = err.message;
-  }
-
-  if (err instanceof HttpException) {
-    error.status = err.status;
-  }
+  // Handle common Error
+  error.message = err?.message;
+  error.status = err?.status ?? HttpStatus.INTERNAL_SERVER_ERROR;
 
   if (Array.isArray(err) && err instanceof Array<ValidationError>) {
     error.errors = err.map((e) => ({
