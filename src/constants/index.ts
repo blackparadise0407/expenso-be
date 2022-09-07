@@ -4,4 +4,6 @@ export const ROOT_DIR = process.cwd();
 
 export const ENV = {
   DB_URI: process.env.DB_URI,
+  AUDIENCE: process.env.AUDIENCE || 'http://localhost:8080',
+  ISSUER_BASE_URL: process.env.ISSUER_BASE_URL,
 };

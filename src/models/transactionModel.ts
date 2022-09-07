@@ -1,27 +1,27 @@
 import { model, Schema } from 'mongoose';
 
-interface Category {
+export interface Transaction {
   id: string;
   name: string;
-  description: string;
-  imgUrl: string;
+  amount: number;
   createdById: string;
+  transactionDate: Date;
 }
 
-const schema = new Schema<Category>(
+const schema = new Schema<Transaction>(
   {
     name: {
       type: String,
       required: true,
       index: true,
     },
-    description: {
-      type: String,
-      default: '',
+    transactionDate: {
+      type: Date,
+      required: true,
     },
-    imgUrl: {
-      type: String,
-      default: '',
+    amount: {
+      type: Number,
+      default: 0,
     },
     createdById: {
       type: String,
@@ -36,4 +36,4 @@ const schema = new Schema<Category>(
   },
 );
 
-export const CategoryModel = model('Category', schema);
+export const TransactionModel = model('Transaction', schema);

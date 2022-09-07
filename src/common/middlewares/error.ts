@@ -1,5 +1,6 @@
 import { ValidationError } from 'class-validator';
 import { ErrorRequestHandler, RequestHandler } from 'express';
+import { UnauthorizedError } from 'express-oauth2-jwt-bearer';
 
 import { HttpStatus } from '../enums/HttpStatusEnum';
 import { HttpException } from '../exceptions/HttpException';
@@ -23,12 +24,18 @@ export const error: ErrorRequestHandler = (err, req, res, _next) => {
   const error = {
     errors: null,
   } as IAppError;
+  if (err instanceof UnauthorizedError) {
+    error.status = err.statusCode;
+  }
+
   if (err instanceof Error) {
     error.message = err.message;
   }
+
   if (err instanceof HttpException) {
     error.status = err.status;
   }
+
   if (Array.isArray(err) && err instanceof Array<ValidationError>) {
     error.errors = err.map((e) => ({
       field: e.property,
@@ -39,5 +46,5 @@ export const error: ErrorRequestHandler = (err, req, res, _next) => {
   }
   error.path = req.originalUrl;
   error.timestamp = Date.now();
-  return res.send(error).status(error.status);
+  return res.status(error.status).send(error);
 };
