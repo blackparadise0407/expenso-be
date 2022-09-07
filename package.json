@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "prettier": "prettier -w src",
+    "prettier": "prettier -c src",
     "clean": "rimraf dist",
     "lint": "eslint --fix --ext .ts src",
     "prebuild": "concurrently yarn:clean yarn:lint yarn:prettier",
