@@ -7,6 +7,7 @@ import { NotFoundException } from '../exceptions/NotFoundException';
 
 interface IAppError {
   path: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errors: any;
   message: string;
   status: HttpStatus;

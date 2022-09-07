@@ -1,5 +1,3 @@
-require('module-alias/register');
-
 import fs from 'fs';
 import path from 'path';
 
@@ -7,17 +5,23 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
+import moduleAlias from 'module-alias';
 import morgan from 'morgan';
 import * as rfs from 'rotating-file-stream';
+
 config();
+moduleAlias.addAlias('@', __dirname);
 
 import apiRoutes from '@/routes/apiRoute';
 
 import { dbConnect } from './common/helpers/database';
+import { Logger } from './common/helpers/Logger';
 import { error, notFound } from './common/middlewares/error';
 import { IS_PROD, ROOT_DIR } from './constants';
 
 const app = express();
+
+const logger = new Logger('App');
 
 app.use(helmet());
 app.use(
@@ -31,9 +35,9 @@ if (IS_PROD) {
   if (!fs.existsSync(path.join(ROOT_DIR, LOGS_PATH))) {
     fs.mkdir(path.join(ROOT_DIR, LOGS_PATH), (err) => {
       if (err) {
-        console.log(err.message);
+        logger.error(err.message);
       } else {
-        console.log('Logs directory successfully created');
+        logger.log('Logs directory successfully created');
       }
     });
   }
@@ -77,8 +81,13 @@ app.use(error);
 
 const PORT = process.env.PORT || 8080;
 
-dbConnect().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+dbConnect()
+  .then(() => {
+    app.listen(PORT, () => {
+      logger.log(`Server started on port ${PORT}`);
+    });
+  })
+  .catch((e) => {
+    logger.error(e);
+    process.exit(1);
   });
-});
