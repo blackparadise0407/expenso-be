@@ -1,4 +1,5 @@
-import { model, Schema } from 'mongoose';
+import { Document, model, PaginateModel, Schema } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 import { Category } from './categoryModel';
 
@@ -11,6 +12,8 @@ export interface Transaction {
   income: boolean;
   category: Category;
 }
+
+export type TransactionDocument = Document & Transaction;
 
 const schema = new Schema<Transaction>(
   {
@@ -52,4 +55,9 @@ schema.set('toJSON', {
   virtuals: true,
 });
 
-export const TransactionModel = model('Transaction', schema);
+schema.plugin(mongoosePaginate);
+
+export const TransactionModel = model<
+  TransactionDocument,
+  PaginateModel<TransactionDocument>
+>('Transaction', schema);

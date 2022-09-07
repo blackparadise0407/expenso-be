@@ -20,7 +20,7 @@ export const transactionService = {
     await transaction.save();
     return transaction;
   },
-  getAllByUserId: (
+  getAllByUserId: async (
     userId: string,
     queries: TransactionQuery = {
       pageIndex: 1,
@@ -54,10 +54,10 @@ export const transactionService = {
       sort[queries.orderBy] = queries.order ?? 'desc';
     }
 
-    const skip = (queries.pageIndex! - 1) * queries.pageSize!;
-    return TransactionModel.find(filters)
-      .limit(queries.pageSize!)
-      .skip(skip)
-      .sort(sort);
+    return TransactionModel.paginate(filters, {
+      page: queries.pageIndex,
+      limit: queries.pageSize,
+      sort,
+    });
   },
 };
