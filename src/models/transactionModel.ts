@@ -1,11 +1,15 @@
 import { model, Schema } from 'mongoose';
 
+import { Category } from './categoryModel';
+
 export interface Transaction {
   id: string;
   name: string;
   amount: number;
   createdById: string;
   transactionDate: Date;
+  income: boolean;
+  category: Category;
 }
 
 const schema = new Schema<Transaction>(
@@ -18,6 +22,7 @@ const schema = new Schema<Transaction>(
     transactionDate: {
       type: Date,
       required: true,
+      index: -1,
     },
     amount: {
       type: Number,
@@ -28,12 +33,23 @@ const schema = new Schema<Transaction>(
       default: '',
       index: true,
     },
+    income: {
+      type: Boolean,
+      default: false,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+    },
   },
   {
     versionKey: false,
     timestamps: true,
-    virtuals: true,
   },
 );
+
+schema.set('toJSON', {
+  virtuals: true,
+});
 
 export const TransactionModel = model('Transaction', schema);

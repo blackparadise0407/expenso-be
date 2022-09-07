@@ -7,4 +7,7 @@ export const categoryService = {
     await category.save();
     return category;
   },
+  getAllByUserId: (userId: string) => {
+    return CategoryModel.find({ createdById: userId }).sort({ name: 1 });
+  },
 };

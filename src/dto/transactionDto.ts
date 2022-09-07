@@ -1,13 +1,25 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDateString,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 import { Transaction } from '@/models/transactionModel';
 
 type ICreateTransactionDTO = Pick<
   Transaction,
-  'name' | 'amount' | 'createdById' | 'transactionDate'
+  'name' | 'amount' | 'createdById' | 'transactionDate' | 'income'
 >;
 
 export class CreateTransactionDTO implements ICreateTransactionDTO {
+  @IsBoolean()
+  @IsOptional()
+  income: boolean;
+
   @IsNumber()
   amount: number;
 
@@ -20,4 +32,7 @@ export class CreateTransactionDTO implements ICreateTransactionDTO {
 
   @IsNotEmpty()
   name: string;
+
+  @IsMongoId()
+  category: string;
 }

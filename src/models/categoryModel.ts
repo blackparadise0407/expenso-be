@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-interface Category {
+export interface Category {
   id: string;
   name: string;
   description: string;
@@ -25,15 +25,18 @@ const schema = new Schema<Category>(
     },
     createdById: {
       type: String,
-      default: '',
+      required: true,
       index: true,
     },
   },
   {
     versionKey: false,
     timestamps: true,
-    virtuals: true,
   },
 );
+
+schema.set('toJSON', {
+  virtuals: true,
+});
 
 export const CategoryModel = model('Category', schema);
