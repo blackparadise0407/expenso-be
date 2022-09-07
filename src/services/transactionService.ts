@@ -45,6 +45,9 @@ export const transactionService = {
     if (queries.max) {
       filters.amount = { $lte: queries.max };
     }
+    if (queries.income !== undefined) {
+      filters.income = queries.income;
+    }
 
     const sort: { [key: string]: SortOrder } = {};
     if (queries.orderBy) {
