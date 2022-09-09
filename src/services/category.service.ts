@@ -1,5 +1,5 @@
-import { CreateCategoryDTO } from '@/dto/categoryDto';
-import { CategoryModel } from '@/models/categoryModel';
+import { CreateCategoryDTO } from '@/dto/category.dto';
+import { CategoryModel } from '@/models/category.model';
 
 export const categoryService = {
   createCategory: async (payload: CreateCategoryDTO) => {

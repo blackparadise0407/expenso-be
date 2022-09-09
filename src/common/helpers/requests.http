@@ -1,0 +1,38 @@
+@host = http://localhost:8080/api
+@accessToken = Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkZ2YVBwMVdwaFk5WDBwX2h1RmJnaSJ9.eyJpc3MiOiJodHRwczovL2Rldi0ycXkxeWI1My51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDgzMTU2NDMxMTk2ODAwMzI5NDUiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cHM6Ly9kZXYtMnF5MXliNTMudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTY2MjcyODUxOCwiZXhwIjoxNjYyODE0OTE4LCJhenAiOiJwb0FVYjNZT0ZXeVdlYmJlNUc0c2FvZ2w3S016dm1RbyIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwifQ.fE9sRe5_8LQgHaXNn_ZR73gIugYtsMNSfWhLqmLs7Y1x73bO2F6t6C7fMsazz0pt9NsyYKVXORf2zkRXE5u1Ldtj7GdoNOPWI7U-K6UEHbVSJJ_Jdg3GIoO61YQCIVblRtpJpS0TO2RpkAUTG400u2AHbESKKO62UFKxJw2fHVXomNoDH5cg0lyS5NqEZlxiRwto-Yx1X8mVCDObpYVQrPYQjCtDMNEdeNXyFzwu3Q10AALaa7Z0f2-1ybaTERqytYtECPrlFHY-BF35JaKOQJHZIDMMgSKAdoFutBV7c1w6jnPoZcdsplSd09Q23AFUG1Z50HtAaNxWGRKCIJA32Q
+
+# Categories
+
+GET {{host}}/categories HTTP/1.1
+Authorization: {{accessToken}}
+
+### 
+
+POST {{host}}/categories HTTP/1.1
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "name": "Grocery"
+}
+
+###
+
+# Transactions
+
+GET {{host}}/transactions?pageSize=20 HTTP/1.1
+Authorization: {{accessToken}}
+
+###
+
+POST {{host}}/transactions HTTP/1.1
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "amount": 1024000,
+    "transactionDate": "2022-09-11T08:50:37.299Z",
+    "name": "Vialand",
+    "category": "631afe5da85e505fcda86bb8",
+    "income": true
+}

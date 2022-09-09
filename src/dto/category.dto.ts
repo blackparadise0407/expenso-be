@@ -1,6 +1,6 @@
 import { IsNotEmpty, Length } from 'class-validator';
 
-import { Category } from '@/models/categoryModel';
+import { Category } from '@/models/category.model';
 
 type ICreateCategoryDTO = Pick<
   Category,

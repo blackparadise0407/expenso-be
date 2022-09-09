@@ -1,7 +1,7 @@
 import { Document, model, PaginateModel, Schema } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-import { Category } from './categoryModel';
+import { Category } from './category.model';
 
 export interface Transaction {
   id: string;

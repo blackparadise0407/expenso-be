@@ -1,8 +1,8 @@
 import { validate } from 'class-validator';
 
 import { catchAsync } from '@/common/helpers/catchAsync';
-import { CreateTransactionDTO } from '@/dto/transactionDto';
-import { transactionService } from '@/services/transactionService';
+import { CreateTransactionDTO } from '@/dto/transaction.dto';
+import { transactionService } from '@/services/transaction.service';
 
 export const transactionController = {
   get: catchAsync(async (req, res) => {

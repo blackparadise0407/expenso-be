@@ -1,8 +1,8 @@
 import { validate } from 'class-validator';
 
 import { catchAsync } from '@/common/helpers/catchAsync';
-import { CreateCategoryDTO } from '@/dto/categoryDto';
-import { categoryService } from '@/services/categoryService';
+import { CreateCategoryDTO } from '@/dto/category.dto';
+import { categoryService } from '@/services/category.service';
 
 export const categoryController = {
   get: catchAsync(async (req, res) => {

@@ -8,7 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 
-import { Transaction } from '@/models/transactionModel';
+import { Transaction } from '@/models/transaction.model';
 
 type ICreateTransactionDTO = Pick<
   Transaction,

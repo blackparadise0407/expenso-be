@@ -12,11 +12,11 @@ import * as rfs from 'rotating-file-stream';
 config();
 moduleAlias.addAlias('@', __dirname);
 
-import apiRoutes from '@/routes/apiRoute';
+import apiRoutes from '@/routes/api.route';
 
 import { dbConnect } from './common/helpers/database';
 import { Logger } from './common/helpers/Logger';
-import { error, notFound } from './common/middlewares/error';
+import { error, notFound } from './common/middlewares/error.middleware';
 import { IS_PROD, ROOT_DIR } from './constants';
 
 const app = express();

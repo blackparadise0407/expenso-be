@@ -1,9 +1,9 @@
 import express from 'express';
 
-import { checkJwt } from '@/common/middlewares/auth';
+import { checkJwt } from '@/common/middlewares/auth.middleware';
 
-import categoryApi from './categoryRoute';
-import transactionApi from './transactionRoute';
+import categoryApi from './category.route';
+import transactionApi from './transaction.route';
 
 const router = express.Router();
 

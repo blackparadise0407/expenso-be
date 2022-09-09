@@ -1,7 +1,7 @@
 import { FilterQuery, SortOrder } from 'mongoose';
 
-import { CreateTransactionDTO } from '@/dto/transactionDto';
-import { Transaction, TransactionModel } from '@/models/transactionModel';
+import { CreateTransactionDTO } from '@/dto/transaction.dto';
+import { Transaction, TransactionModel } from '@/models/transaction.model';
 
 export interface TransactionQuery extends PaginateQuery {
   income?: boolean;
