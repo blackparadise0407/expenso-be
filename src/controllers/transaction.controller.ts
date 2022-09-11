@@ -31,4 +31,11 @@ export const transactionController = {
 
     res.json(transaction);
   }),
+  getAnalytic: catchAsync(async (req, res) => {
+    const transactions = await transactionService.getAnalyticsByUserId(
+      req.auth?.payload.sub ?? '',
+      req.query,
+    );
+    res.json(transactions);
+  }),
 };

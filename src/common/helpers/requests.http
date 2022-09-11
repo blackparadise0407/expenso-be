@@ -20,7 +20,7 @@ Authorization: {{accessToken}}
 
 # Transactions
 
-GET {{host}}/transactions?pageSize=20 HTTP/1.1
+GET {{host}}/transactions?pageSize=20&fromDate=2022-09-05T17:00:00.000Z&toDate=2022-09-09T17:00:00.000Z HTTP/1.1
 Authorization: {{accessToken}}
 
 ###
@@ -36,3 +36,8 @@ Authorization: {{accessToken}}
     "category": "631afe5da85e505fcda86bb8",
     "income": true
 }
+
+###
+
+GET {{host}}/transactions/analytics?&fromDate=2022-09-05T17:00:00.000Z&toDate=2022-09-09T17:00:00.000Z HTTP/1.1
+Authorization: {{accessToken}}
