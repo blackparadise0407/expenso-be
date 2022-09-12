@@ -11,6 +11,7 @@ export interface Transaction {
   transactionDate: number;
   income: boolean;
   category: Category;
+  lowerName: string;
 }
 
 export type TransactionDocument = Document & Transaction;
@@ -44,6 +45,9 @@ const schema = new Schema<Transaction>(
       type: Schema.Types.ObjectId,
       ref: 'Category',
     },
+    lowerName: {
+      type: String,
+    },
   },
   {
     versionKey: false,
@@ -53,6 +57,11 @@ const schema = new Schema<Transaction>(
 
 schema.set('toJSON', {
   virtuals: true,
+});
+
+schema.pre('save', async function (next) {
+  this.lowerName = this.name.toLowerCase();
+  next();
 });
 
 schema.plugin(mongoosePaginate);

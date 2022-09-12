@@ -58,7 +58,8 @@ export const transactionService = {
 
     const sort: { [key: string]: SortOrder } = {};
     if (queries.orderBy) {
-      sort[queries.orderBy] = queries.order ?? 'desc';
+      sort[queries.orderBy === 'name' ? 'lowerName' : queries.orderBy] =
+        queries.order ?? 'desc';
     }
 
     return TransactionModel.paginate(filters, {
