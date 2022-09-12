@@ -1,6 +1,5 @@
 import {
   IsBoolean,
-  IsDateString,
   IsMongoId,
   IsNotEmpty,
   IsNumber,
@@ -27,8 +26,8 @@ export class CreateTransactionDTO implements ICreateTransactionDTO {
   @IsNotEmpty()
   createdById: string;
 
-  @IsDateString()
-  transactionDate: Date;
+  @IsNumber()
+  transactionDate: number;
 
   @IsNotEmpty()
   name: string;
