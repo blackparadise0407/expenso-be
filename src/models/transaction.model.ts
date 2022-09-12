@@ -8,7 +8,7 @@ export interface Transaction {
   name: string;
   amount: number;
   createdById: string;
-  transactionDate: Date;
+  transactionDate: number;
   income: boolean;
   category: Category;
 }
@@ -23,7 +23,7 @@ const schema = new Schema<Transaction>(
       index: true,
     },
     transactionDate: {
-      type: Date,
+      type: Number,
       required: true,
       index: -1,
     },
