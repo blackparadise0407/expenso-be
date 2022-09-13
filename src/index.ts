@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
+import compression from 'compression';
 import cors from 'cors';
 import { config } from 'dotenv';
 import express from 'express';
@@ -19,14 +20,34 @@ import { Logger } from './common/helpers/Logger';
 import { error, notFound } from './common/middlewares/error.middleware';
 import { IS_PROD, ROOT_DIR } from './constants';
 
+if (IS_PROD && !process.env.CORS_ORIGINS) {
+  throw new Error('Please set up cors origins before starting the application');
+}
+
 const app = express();
 
 const logger = new Logger('App');
 
+app.use(compression());
 app.use(helmet());
 app.use(
   cors({
-    origin: '*',
+    origin: (requestOrigins, cb) => {
+      const corsOrigins = process.env.CORS_ORIGINS!;
+      if (corsOrigins === '*') {
+        cb(null, corsOrigins);
+        return;
+      }
+      if (corsOrigins.split(',').indexOf(requestOrigins ?? '') > -1) {
+        cb(null, requestOrigins);
+        return;
+      }
+      const error = new Error(
+        `Request from origin ${requestOrigins} is not allowed`,
+      );
+      logger.error(error.message);
+      cb(error);
+    },
   }),
 );
 
