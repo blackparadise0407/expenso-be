@@ -18,7 +18,7 @@ import apiRoutes from '@/routes/api.route';
 import { dbConnect } from './common/helpers/database';
 import { Logger } from './common/helpers/Logger';
 import { error, notFound } from './common/middlewares/error.middleware';
-import { IS_PROD, ROOT_DIR } from './constants';
+import { IS_DEV, IS_PROD, ROOT_DIR } from './constants';
 
 if (IS_PROD && !process.env.CORS_ORIGINS) {
   throw new Error('Please set up cors origins before starting the application');
@@ -33,7 +33,7 @@ app.use(helmet());
 app.use(
   cors({
     origin: (requestOrigins, cb) => {
-      const corsOrigins = process.env.CORS_ORIGINS!;
+      const corsOrigins = process.env.CORS_ORIGINS ?? (IS_DEV ? '*' : '');
       if (corsOrigins === '*') {
         cb(null, corsOrigins);
         return;

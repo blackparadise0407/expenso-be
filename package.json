@@ -10,7 +10,7 @@
     "prebuild": "concurrently yarn:clean yarn:lint yarn:prettier",
     "build": "tsc",
     "start": "SET NODE_ENV=production&& node .",
-    "dev": "tsnd --respawn --transpile-only src/index.ts"
+    "dev": "SET NODE_ENV=development&& tsnd --respawn --transpile-only src/index.ts"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",
