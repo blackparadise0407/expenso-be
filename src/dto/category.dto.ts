@@ -1,4 +1,12 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { Exclude } from 'class-transformer';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+  Length,
+  MaxLength,
+} from 'class-validator';
 
 import { Category } from '@/models/category.model';
 
@@ -16,4 +24,28 @@ export class CreateCategoryDTO implements ICreateCategoryDTO {
 
   @Length(3, 20)
   name: string;
+}
+
+type IUpdateCategoryDTO = Pick<
+  Category,
+  'imgUrl' | 'name' | 'description' | 'createdById'
+>;
+
+export class UpdateCategoryDTO implements IUpdateCategoryDTO {
+  @IsString()
+  @IsUrl()
+  @IsOptional()
+  imgUrl: string;
+
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @MaxLength(200)
+  @IsString()
+  @IsOptional()
+  description: string;
+
+  @Exclude()
+  createdById: string;
 }

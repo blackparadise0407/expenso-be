@@ -1,5 +1,5 @@
 @host = http://localhost:8080/api
-@accessToken = Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkZ2YVBwMVdwaFk5WDBwX2h1RmJnaSJ9.eyJpc3MiOiJodHRwczovL2Rldi0ycXkxeWI1My51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDgzMTU2NDMxMTk2ODAwMzI5NDUiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cHM6Ly9kZXYtMnF5MXliNTMudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTY2MjgyMjc0OCwiZXhwIjoxNjYyOTA5MTQ4LCJhenAiOiJwb0FVYjNZT0ZXeVdlYmJlNUc0c2FvZ2w3S016dm1RbyIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwifQ.bjw16W2Atc4cEaf4u4TuaTnsXGqXieQ-QR_1vOaStv-G7Btig2HAdqIxV9mS8fFeYGMHk_gOY38zaPDQ3vDLsjmwT9f5HLQLGuvKOWp8oMJ3s_j-e6TkyR4HfgoPQb5ntDsW9NOL7uk6oNQy3uP7b7DmkBX0RugiIr8JxJOqSsxNoAeNJAxBx61AHVzZ5yxEEBMQ_mbx-4l4E_y695sP-DcZwLo6x06s5E21B2a_NRp5yBSGX9pFURcgQbEn3qKjd_M94yi_jg3J5LRKt71NX3y0WlavbQuzrL1fSGlE3d1OqPBJACEAwJMujst0LaKZ9K6E4KK-FwhzEY9a_JEA4Q
+@accessToken = Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkZ2YVBwMVdwaFk5WDBwX2h1RmJnaSJ9.eyJpc3MiOiJodHRwczovL2Rldi0ycXkxeWI1My51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDgzMTU2NDMxMTk2ODAwMzI5NDUiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiaHR0cHM6Ly9kZXYtMnF5MXliNTMudXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTY2MzEzMDAwOSwiZXhwIjoxNjYzMjE2NDA5LCJhenAiOiJwb0FVYjNZT0ZXeVdlYmJlNUc0c2FvZ2w3S016dm1RbyIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwifQ.LZV_rLJXsNXR_rqLvulxqXJTnB9F1AIc1A8o60V3mTY9z5Y35tzDr7kbyYTCgcOO7Y3pAN1m97pGdiVY2WP9mfYRPiC3kvPVCBfBfpEJouDJtbqHBmvfCcgGObiD-zNfRHsmALJjGUknJ-6SOvazLBUA1cdSuTVkRpZdCqDA9iW5-eFWxfekb4IELgzplW7gPovN6Cj9TV3pRceteecK_S9CT6Xmm7BJ3wGK2lCsaHM54DzyI8sPLhQEDDRIVfeI_O7q9SyzglBQvbCqbBorF1a4FtXNZquedpiFyveuRhk08Nk1pyNyspXsZbxgHxyF0e3UA6NgS7eWnCcxNMGp7g
 
 # Categories
 
@@ -15,6 +15,23 @@ Authorization: {{accessToken}}
 {
     "name": "Food"
 }
+
+###
+
+PATCH {{host}}/categories/631afe5da85e505fcda86bb8 HTTP/1.1
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+    "name": "Updated 2",
+    "description": "Wow",
+    "createdById": "google-oauth2|108315643119680032945"
+}
+
+###
+
+DELETE  {{host}}/categories/6320b0e1361a75a01bb078a3 HTTP/1.1
+Authorization: {{accessToken}}
 
 ###
 

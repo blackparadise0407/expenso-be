@@ -34,6 +34,10 @@ app.use(
   cors({
     origin: (requestOrigins, cb) => {
       const corsOrigins = process.env.CORS_ORIGINS ?? (IS_DEV ? '*' : '');
+      if (IS_DEV) {
+        cb(null, '*');
+        return;
+      }
       if (corsOrigins === '*') {
         cb(null, corsOrigins);
         return;

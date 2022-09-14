@@ -66,6 +66,7 @@ export const transactionService = {
       page: queries.pageIndex,
       limit: queries.pageSize,
       sort,
+      populate: { path: 'category', select: { imgUrl: 1 } },
     });
   },
   getAnalyticsByUserId: (userId: string, queries: TransactionQuery) => {
