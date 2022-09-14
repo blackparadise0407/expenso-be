@@ -21,6 +21,7 @@ export const transactionController = {
     createTransaction.transactionDate = req.body.transactionDate;
     createTransaction.category = req.body.category;
     createTransaction.income = req.body.income;
+    createTransaction.description = req.body.description;
 
     const err = await validate(createTransaction);
     if (err.length) {

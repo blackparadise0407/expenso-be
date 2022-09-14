@@ -3,7 +3,6 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsUrl,
   Length,
   MaxLength,
 } from 'class-validator';
@@ -32,8 +31,6 @@ type IUpdateCategoryDTO = Pick<
 >;
 
 export class UpdateCategoryDTO implements IUpdateCategoryDTO {
-  @IsString()
-  @IsUrl()
   @IsOptional()
   imgUrl: string;
 

@@ -9,6 +9,7 @@ export interface Transaction {
   amount: number;
   createdById: string;
   transactionDate: number;
+  description: string;
   income: boolean;
   category: Category;
   lowerName: string;
@@ -40,6 +41,11 @@ const schema = new Schema<Transaction>(
     income: {
       type: Boolean,
       default: false,
+    },
+    description: {
+      type: String,
+      default: '',
+      maxlength: 100,
     },
     category: {
       type: Schema.Types.ObjectId,

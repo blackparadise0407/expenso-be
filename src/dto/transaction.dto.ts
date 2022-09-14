@@ -11,7 +11,12 @@ import { Transaction } from '@/models/transaction.model';
 
 type ICreateTransactionDTO = Pick<
   Transaction,
-  'name' | 'amount' | 'createdById' | 'transactionDate' | 'income'
+  | 'name'
+  | 'amount'
+  | 'createdById'
+  | 'transactionDate'
+  | 'income'
+  | 'description'
 >;
 
 export class CreateTransactionDTO implements ICreateTransactionDTO {
@@ -34,4 +39,8 @@ export class CreateTransactionDTO implements ICreateTransactionDTO {
 
   @IsMongoId()
   category: string;
+
+  @IsString()
+  @IsOptional()
+  description: string;
 }
