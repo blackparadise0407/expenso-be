@@ -39,4 +39,11 @@ export const transactionController = {
     );
     res.json(transactions);
   }),
+  delete: catchAsync(async (req, res) => {
+    await transactionService.deleteById(
+      req.auth?.payload.sub ?? '',
+      req.params.id,
+    );
+    res.json({ message: 'Delete transaction success' });
+  }),
 };

@@ -1,5 +1,7 @@
 import { FilterQuery, PipelineStage, SortOrder } from 'mongoose';
 
+import { ForbiddenException } from '@/common/exceptions/ForbiddenException';
+import { NotFoundException } from '@/common/exceptions/NotFoundException';
 import { CreateTransactionDTO } from '@/dto/transaction.dto';
 import { Transaction, TransactionModel } from '@/models/transaction.model';
 
@@ -115,5 +117,15 @@ export const transactionService = {
         },
       },
     ]);
+  },
+  deleteById: async (userId: string, transactionId: string) => {
+    const transaction = await TransactionModel.findById(transactionId);
+    if (!transaction) {
+      throw new NotFoundException();
+    }
+    if (userId !== transaction.createdById) {
+      throw new ForbiddenException();
+    }
+    await transaction.delete();
   },
 };
