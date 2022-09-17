@@ -13,7 +13,7 @@ export interface TransactionQuery {
   orderBy?: keyof Transaction;
   min?: number;
   max?: number;
-  categoryId?: string;
+  categoryIds?: string;
 }
 
 export type PaginatedTransactionQuery = PaginateQuery & TransactionQuery;
@@ -34,8 +34,8 @@ export const transactionService = {
     const filters: FilterQuery<Transaction> = {
       createdById: userId,
     };
-    if (queries.categoryId) {
-      filters.category = queries.categoryId;
+    if (queries.categoryIds) {
+      filters.category = { $in: queries.categoryIds };
     }
     if (queries.fromDate) {
       filters.transactionDate = {
