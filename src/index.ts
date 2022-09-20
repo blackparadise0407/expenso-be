@@ -18,6 +18,7 @@ import apiRoutes from '@/routes/api.route';
 import { dbConnect } from './common/helpers/database';
 import { Logger } from './common/helpers/Logger';
 import { error, notFound } from './common/middlewares/error.middleware';
+import { queryParser } from './common/middlewares/query-parser.middleware';
 import { IS_DEV, IS_PROD, ROOT_DIR } from './constants';
 
 if (IS_PROD && !process.env.CORS_ORIGINS) {
@@ -97,6 +98,7 @@ if (IS_PROD) {
 }
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(queryParser());
 
 app.use('/api', apiRoutes);
 

@@ -6,7 +6,7 @@ import { CreateTransactionDTO } from '@/dto/transaction.dto';
 import { Transaction, TransactionModel } from '@/models/transaction.model';
 
 export interface TransactionQuery {
-  income?: boolean;
+  type?: string;
   fromDate?: Date;
   toDate?: Date;
   order?: SortOrder;
@@ -35,7 +35,9 @@ export const transactionService = {
       createdById: userId,
     };
     if (queries.categoryIds) {
-      filters.category = { $in: queries.categoryIds };
+      filters.category = {
+        $in: queries.categoryIds,
+      };
     }
     if (queries.fromDate) {
       filters.transactionDate = {
@@ -54,8 +56,8 @@ export const transactionService = {
     if (queries.max) {
       filters.amount = { $lte: queries.max };
     }
-    if (queries.income !== undefined) {
-      filters.income = queries.income;
+    if (queries.type) {
+      filters.income = { $in: queries.type };
     }
 
     const sort: { [key: string]: SortOrder } = {};
