@@ -54,7 +54,10 @@ export const transactionService = {
       filters.amount = { $gte: queries.min };
     }
     if (queries.max) {
-      filters.amount = { $lte: queries.max };
+      filters.amount = {
+        ...filters.amount,
+        $lte: queries.max,
+      };
     }
     if (queries.type) {
       filters.income = { $in: queries.type };
