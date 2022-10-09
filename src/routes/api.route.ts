@@ -7,7 +7,7 @@ import transactionApi from './transaction.route';
 
 const router = express.Router();
 
-router.get('/', (_, res) => {
+router.get('/ping', (_, res) => {
   res.send('Pong');
 });
 router.use('/categories', checkJwt, categoryApi);
