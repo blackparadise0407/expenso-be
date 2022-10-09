@@ -7,6 +7,9 @@ import transactionApi from './transaction.route';
 
 const router = express.Router();
 
+router.get('/', (_, res) => {
+  res.send('Pong');
+});
 router.use('/categories', checkJwt, categoryApi);
 router.use('/transactions', checkJwt, transactionApi);
 
