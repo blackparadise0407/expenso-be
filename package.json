@@ -9,8 +9,8 @@
     "lint": "eslint --fix --ext .ts src",
     "prebuild": "concurrently yarn:clean yarn:lint yarn:prettier",
     "build": "tsc",
-    "start": "SET NODE_ENV=production&& node .",
-    "dev": "SET NODE_ENV=development&& tsnd --respawn --transpile-only src/index.ts"
+    "start": "set NODE_ENV=production&& node .",
+    "dev": "set NODE_ENV=development&& tsnd --respawn --transpile-only src/index.ts"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",
